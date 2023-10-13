@@ -1,5 +1,7 @@
 package ru.netology
 
+import org.jetbrains.annotations.TestOnly as TestOnly1
+
 fun main() {
     val itemPrice = 100
     val itemCount = 11
@@ -14,7 +16,6 @@ fun main() {
 
     println("Total Price: $result")
 }
-
 fun calculatePrice(
     itemCount: Int,
     itemPrice: Int = 100,
@@ -26,6 +27,7 @@ fun calculatePrice(
     val discounted = if (total > discountStart) total - discount else total
     return ((1 - userLevelToDiscount(userLevel)) * discounted).toInt()
 }
+
 
 
 //fun userLevelToDiscount(level: String = "normal"): Double {
