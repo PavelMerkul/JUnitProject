@@ -11,7 +11,7 @@ class MainKtTest {
     fun calculatePrice_shouldNotAddDiscount() {
         // arrange
         val count = 1
-        val price = 100
+        val price = 0
         val discount = 10
         val start = 1_000
         val level = "gold"
