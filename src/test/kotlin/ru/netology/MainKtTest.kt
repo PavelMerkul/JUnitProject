@@ -1,53 +1,30 @@
-package ru.netology
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.Assertions.assertEquals
+import ru.netology.TransferFeeCalculator
 
-import org.junit.Test
-
-import org.junit.Assert.*
-
-class MainKtTest {
+class TransferFeeCalculatorTest {
 
     @Test
-//    fun `calculatePrice shouldn't add discount`() {
-    fun calculatePrice_shouldNotAddDiscount() {
-        // arrange
-        val count = 1
-        val price = 0
-        val discount = 10
-        val start = 1_000
-        val level = "gold"
-
-        // act
-        val result = calculatePrice(
-            itemCount = count,
-            itemPrice = price,
-            discount = discount,
-            discountStart = start,
-            userLevel = level
-        )
-
-        // assert
-        assertEquals(90, result)
+    fun testCalculateFeeBelowMinimum() {
+        val amount = 100.0
+        val expectedFee = 35.0
+        val actualFee = TransferFeeCalculator.calculateFee(amount)
+        assertEquals(expectedFee, actualFee, 0.01)
     }
 
     @Test
-    fun calculatePrice_shouldAddDiscount() {
-        // arrange
-        val count = 1
-        val price = 1_000
-        val discount = 10
-        val start = 100
-        val level = "gold"
+    fun testCalculateFeeAboveMinimum() {
+        val amount = 2000.0
+        val expectedFee = 15.0 // 0.0075 * 2000
+        val actualFee = TransferFeeCalculator.calculateFee(amount)
+        assertEquals(expectedFee, actualFee, 0.01)
+    }
 
-        // act
-        val result = calculatePrice(
-            itemCount = count,
-            itemPrice = price,
-            discount = discount,
-            discountStart = start,
-            userLevel = level
-        )
-
-        // assert
-        assertEquals(891, result)
+    @Test
+    fun testCalculateFeeWithMinimum() {
+        val amount = 20.0
+        val expectedFee = 35.0 // Минимальная комиссия
+        val actualFee = TransferFeeCalculator.calculateFee(amount)
+        assertEquals(expectedFee, actualFee, 0.01)
     }
 }
